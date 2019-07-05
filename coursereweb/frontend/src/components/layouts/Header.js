@@ -3,27 +3,31 @@ import React, { Component } from 'react'
 export class Header extends Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-sm navbar-light bg-light">
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a className="navbar-brand" href="#">Navbar</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a className="navbar-brand" href="#">Course: Reminder</a>
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                <div className="collapse navbar-collapse" id="navbarColor01">
+                    <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Link</a>
+                        <a className="nav-link" href="#">Features</a>
                     </li>
-                    <li clasclassNames="nav-item">
-                        <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">About</a>
                     </li>
                     </ul>
-                    {/* <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form> */}
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
+                        <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
             </nav>
         )

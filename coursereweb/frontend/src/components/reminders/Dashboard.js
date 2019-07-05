@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import Reminder from './Reminder';
-import Form from './Form';
+import AddReminder from './AddReminder';
 
 export class Dashboard extends Component {
     render() {
         return (
-            <div>
-                <h1>It's a me mario</h1>
-                <Form/>
+            <div style={{margin:'10%', float:'center'}}>
+                <h1>Dashboard</h1>
+                <AddReminder/>
+                <h2> Reminders</h2>
                 <Reminder/>
             </div>
         )
     }
 }
 
-export default Dashboard
+export default Dashboard;
