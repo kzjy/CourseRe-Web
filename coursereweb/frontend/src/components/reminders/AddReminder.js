@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { addReminders} from '../../actions/reminderAction'
 
 export class AddReminder extends Component {
     state = {
         name: '',
-        reminder_type: '',
+        reminder_type: 'Assignment',
         // due_date: '',
         total: 100,
         received: 0,
         weight: 100,
-        course: ''
+        course: 1
+    }
+
+    static propTypes = {
+        addReminders: PropTypes.func.isRequired
     }
 
     onChange = e => this.setState({
@@ -17,7 +24,10 @@ export class AddReminder extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-
+        const {name, reminder_type, total, received, weight, course} = this.state;
+        const newReminder = {name, reminder_type, total, received, weight, course};
+        this.props.addReminders(newReminder);
+        console.log('submit');
     }
 
     render() {
@@ -34,7 +44,7 @@ export class AddReminder extends Component {
                             className="form-control" placeholder="Default input" id="inputDefault"/>
                     </div>
 
-                    {/* course  */}
+                    {/* course 
                     <div className="form-group">
                         <label htmlFor="exampleSelect1">Course</label>
                         <select name="course" className="form-control" id="exampleSelect1" value={course} onChange={this.onChange}>
@@ -43,7 +53,7 @@ export class AddReminder extends Component {
                             <option>Test</option>
                             <option>Study</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     {/* type of reminder  */}
                     <div className="form-group">
@@ -91,4 +101,4 @@ export class AddReminder extends Component {
     }
 }
 
-export default AddReminder
+export default connect(null, {addReminders})(AddReminder);

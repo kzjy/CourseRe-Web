@@ -11,10 +11,10 @@ class Reminder(models.Model):
     # reminder fields
     name = models.CharField(max_length=40, unique=True)
     reminder_type = models.CharField(max_length=40, choices=[
-        ('A', 'Assignment'),
-        ('M', 'Meet up'),
-        ('S', 'Study'),
-        ('T', 'Test')
+        ('Assignment', 'A'),
+        ('Meet up', 'M'),
+        ('Study', 'S'),
+        ('Test', 'T')
     ])
     due_date = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)

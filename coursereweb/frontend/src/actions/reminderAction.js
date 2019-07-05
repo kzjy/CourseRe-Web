@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_REMINDERS, DELETE_REMINDERS } from './types';
+import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS } from './types';
 
 // get the reminders 
 export const getReminders = () => dispatch => {
@@ -20,6 +20,18 @@ export const deleteReminders = (id) => dispatch => {
         dispatch({
             type: DELETE_REMINDERS,
             payload: id
+        })
+    })
+    .catch(e => console.log(e))
+}
+
+// post reminders 
+export const addReminders = (reminder) => dispatch => {
+    axios.post(`/api/reminders/`, reminder)
+    .then(res => {
+        dispatch({
+            type: ADD_REMINDERS,
+            payload: res.data
         })
     })
     .catch(e => console.log(e))

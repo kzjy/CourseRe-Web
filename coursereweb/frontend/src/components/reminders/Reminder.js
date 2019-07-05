@@ -42,7 +42,7 @@ export class Reminder extends Component {
           <tbody>
             {this.props.reminders.map(reminder => (
                 <tr className="table-default" key={reminder.id}>
-                    <td>{reminder.name}}</td>
+                    <td>{reminder.name}</td>
                     <td>{reminder.reminder_type}</td>
                     <td>{reminder.due_date}</td>
                     <td>{reminder.status}</td>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Reminder from './Reminder';
 import AddReminder from './AddReminder';
+import Course from './Course'
 
 export class Dashboard extends Component {
     render() {
@@ -9,7 +10,7 @@ export class Dashboard extends Component {
                 <h1>Dashboard</h1>
                 <AddReminder/>
                 <h2> Reminders</h2>
-                <Reminder/>
+                <Course/>
             </div>
         )
     }
