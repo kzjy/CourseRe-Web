@@ -6,7 +6,7 @@ import Course from './Course'
 export class Dashboard extends Component {
     render() {
         return (
-            <div style={{margin:'10%', float:'center'}}>
+            <div style={{margin:'10%', justifyContent:'center'}}>
                 <h1>Dashboard</h1>
                 <AddReminder/>
                 <h2> Reminders</h2>

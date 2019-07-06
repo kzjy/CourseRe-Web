@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addReminders} from '../../actions/reminderAction'
+import Popup from 'reactjs-popup'
 
 export class AddReminder extends Component {
     state = {
@@ -11,7 +12,8 @@ export class AddReminder extends Component {
         total: 100,
         received: 0,
         weight: 100,
-        course: 1
+        course: 1,
+        popup: false
     }
 
     static propTypes = {
@@ -24,16 +26,34 @@ export class AddReminder extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+        this.setState({popup: false})
         const {name, reminder_type, total, received, weight, course} = this.state;
         const newReminder = {name, reminder_type, total, received, weight, course};
         this.props.addReminders(newReminder);
+        
         console.log('submit');
+    }
+    
+    openPopup = e => {
+        this.setState({popup: true})
+    }
+
+    closePopup = e => {
+        this.setState({popup: false})
     }
 
     render() {
         const {name, reminder_type, total, received, weight, course} = this.state
         return (
-            <div>
+            <Popup
+                trigger={<button className="btn btn-primary"> + </button>}
+                modal
+                closeOnDocumentClick
+                onOpen={this.openPopup}
+                open={this.state.popup}
+            >
+                {close => (
+                <div style={{padding:'20px'}}>
                 <form onSubmit={this.onSubmit}>
                 <fieldset>
                     {/* name of reminder  */}
@@ -91,12 +111,18 @@ export class AddReminder extends Component {
                         <label for="exampleTextarea">Example textarea</label>
                         <textarea className="form-control" id="exampleTextarea" rows="3"></textarea>
                     </div> */}
-
-                    <button type="submit" className="btn btn-primary">Submit</button>
                     
+                    <div style={{justifyContent:'center', display:'flex'}}>
+                        <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Add</button>
+                        <button type="reset" onClick={this.closePopup} style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-secondary">Discard</button>
+                    </div>
                 </fieldset>
                 </form>
+
+                
             </div>
+                )}
+            </Popup>
         )
     }
 }
