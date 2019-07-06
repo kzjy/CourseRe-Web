@@ -39,7 +39,17 @@ export class AddReminder extends Component {
     }
 
     closePopup = e => {
-        this.setState({popup: false})
+        this.setState({
+            name: '',
+            reminder_type: 'Assignment',
+            // due_date: '',
+            total: 100,
+            received: 0,
+            weight: 100,
+            course: 1,
+            popup: false
+
+        })
     }
 
     render() {
