@@ -15,10 +15,9 @@ import Alerts from './layouts/Alerts';
 const alertOptions = {
     position: 'top center',
     timeout: 3000,
-    // containerStyle: {
-    //     width: '600px',
-    // }
+    offset: '50px'
 }
+
 
 class App extends React.Component {
     render () {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, GET_ERRORS } from './types';
-import { createMessage } from './messagesAction';
+import { createMessage, returnErrors } from './messagesAction';
 
 // get the reminders 
 export const getReminders = () => dispatch => {
@@ -12,7 +12,8 @@ export const getReminders = () => dispatch => {
             payload: res.data
         })
     })
-    .catch(e => console.log(e))
+    .catch(e => dispatch(returnErrors(e.response.data, e.response.status))
+    )
 }
 
 // delete reminders 
@@ -25,7 +26,8 @@ export const deleteReminders = (id) => dispatch => {
             payload: id
         })
     })
-    .catch(e => console.log(e))
+    .catch(e => dispatch(returnErrors(e.response.data, e.response.status))
+    )
 }
 
 // post reminders 
@@ -38,15 +40,16 @@ export const addReminders = (reminder) => dispatch => {
             payload: res.data
         })
     })
-    .catch(e => {
-        console.log('found error')
-        const error = {
-            message: e.response.data,
-            status: e.response.status
-        }
-        dispatch({
-            type: GET_ERRORS,
-            payload: error
-        })
-    });
+    .catch(e => 
+        // console.log('found error')
+        // const error = {
+        //     message: e.response.data,
+        //     status: e.response.status
+        // }
+        // dispatch({
+        //     type: GET_ERRORS,
+        //     payload: error
+        // })
+        dispatch(returnErrors(e.response.data, e.response.status))
+    );
 }

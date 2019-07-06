@@ -1,10 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User 
+
 
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=40, unique=True, blank=False)
     notes = models.TextField(max_length=1000, editable=True)
     info = models.TextField(max_length=100, default="A happy little course")
+    owner = models.ForeignKey(User, related_name="owner_courses", on_delete=models.CASCADE, null=True)
 
 class Reminder(models.Model):
 
@@ -26,7 +29,9 @@ class Reminder(models.Model):
     weight = models.FloatField(blank=False, default=100)
 
     # course
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-
+    course = models.ForeignKey(Course, related_name="course_reminders", on_delete=models.CASCADE, null=True, blank=True)
+    
+    # User
+    owner = models.ForeignKey(User, related_name="owner_reminders", on_delete=models.CASCADE, null=True)
 
 
