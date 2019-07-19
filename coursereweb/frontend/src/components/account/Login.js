@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from 'prop-types'
+import { login } from "../../actions/authAction";
 
 export class Login extends Component {
 
     state = {
-        username: '',
         email: '',
         password: '',
 
     }
 
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool
+    }
+
     onSubmit = e => {
         e.preventDefault();
-        console.log("submit ");
+        this.props.login(this.state.email, this.state.password)
     }
 
 
@@ -21,6 +28,13 @@ export class Login extends Component {
     }
 
     render() {
+
+        if (this.props.isAuthenticated) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         const { email, password} = this.state;
         return (
             <div className="col-md-6 m-auto">
@@ -82,4 +96,8 @@ export class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = state => ({
+    isAuthenticated: state.authReducer.isAuthenticated
+})
+
+export default connect(mapStateToProps, {login} )(Login);

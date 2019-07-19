@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, GET_ERRORS } from './types';
 import { createMessage, returnErrors } from './messagesAction';
+import { tokenConfig } from './authAction';
 
 // get the reminders 
-export const getReminders = () => dispatch => {
-    axios.get('/api/reminders/')
+export const getReminders = () => (dispatch, getState) => {
+    axios.get('/api/reminders/', tokenConfig(getState))
     .then(res => {
         
         dispatch({
@@ -17,8 +18,8 @@ export const getReminders = () => dispatch => {
 }
 
 // delete reminders 
-export const deleteReminders = (id) => dispatch => {
-    axios.delete(`/api/reminders/${id}`)
+export const deleteReminders = (id) => (dispatch, getState) => {
+    axios.delete(`/api/reminders/${id}`, tokenConfig(getState))
     .then(res => {
         dispatch(createMessage({ reminderDeleted: 'Reminder Deleted'}))
         dispatch({
@@ -31,8 +32,8 @@ export const deleteReminders = (id) => dispatch => {
 }
 
 // post reminders 
-export const addReminders = (reminder) => dispatch => {
-    axios.post(`/api/reminders/`, reminder)
+export const addReminders = (reminder) => (dispatch, getState) => {
+    axios.post(`/api/reminders/`, reminder, tokenConfig(getState))
     .then(res => {
         dispatch(createMessage({ reminderAdded: "Reminder Added"}))
         dispatch({

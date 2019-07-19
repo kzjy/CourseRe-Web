@@ -12,7 +12,7 @@ class Course(models.Model):
 class Reminder(models.Model):
 
     # reminder fields
-    name = models.CharField(max_length=40, unique=True)
+    name = models.CharField(max_length=40, unique=False)
     reminder_type = models.CharField(max_length=40, choices=[
         ('Assignment', 'A'),
         ('Meet up', 'M'),

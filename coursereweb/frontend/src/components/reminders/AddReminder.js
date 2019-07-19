@@ -31,7 +31,7 @@ export class AddReminder extends Component {
         const newReminder = {name, reminder_type, total, received, weight, course};
         this.props.addReminders(newReminder);
         
-        console.log('submit');
+        this.closePopup()
     }
     
     openPopup = e => {

@@ -16,9 +16,18 @@ export class Alerts extends Component {
         if (error !== prev.error) {
             if (error.message.name) {
                 alert.show(`Name: ${error.message.name.join()}`)
-            }
+            };
             if (error.message.total) {
                 alert.show(`Total: ${error.message.total.join()}`)
+            };
+            if (error.message.non_field_errors) {
+                alert.show(`${error.message.non_field_errors.join()}`)
+            }
+            if (error.message.non_field_errors) {
+                alert.show(`${error.message.non_field_errors.join()}`)
+            }
+            if (error.message.username) {
+                alert.show('The email is already in use')
             }
         }
 
@@ -28,6 +37,9 @@ export class Alerts extends Component {
             }
             if (message.reminderAdded) {
                 alert.success('Successfully added ')
+            }
+            if (message.passwordNotMatch) {
+                alert.show(message.passwordNotMatch)
             }
         }
 
