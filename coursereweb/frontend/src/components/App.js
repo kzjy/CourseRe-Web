@@ -1,14 +1,23 @@
+// package imports
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
-
+import { HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import { Provider  as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
+
+// Actions
+import { loadUser } from '../actions/authAction';
+
+// Components
 import Header from './layouts/Header';
 import Dashboard from './reminders/Dashboard'
 import Alerts from './layouts/Alerts';
+import Register from './account/Register';
+import Login from './account/Login';
+import PrivateRoute from './other/PrivateRoute';
 
 
 // alerts 
@@ -20,10 +29,18 @@ const alertOptions = {
 
 
 class App extends React.Component {
+
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
+
     render () {
         return (
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
+                    <Router>
+
+                    
                     {/* <div style={{
                         position: 'fixed',
                         width:'100%',
@@ -35,9 +52,17 @@ class App extends React.Component {
                         backgroundBlendMode: 'overlay',
                         backgroundImage: 'url(../../static/frontend/resources/default_bg.jpg)'}}/> */}
                     <Header/>
+                    <div className="container">
+                        <Switch>
+                            <PrivateRoute exact path="/" component={Dashboard}/>
+                            <Route exact path="/register" component={Register}/>
+                            <Route exact path="/login" component={Login}/>
+                        </Switch>
+
+                    </div>
                     
-                    <Dashboard/>
                     <Alerts/>
+                    </Router>
                 </AlertProvider>
             </Provider>
         )
