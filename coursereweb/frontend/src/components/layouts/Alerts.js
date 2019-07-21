@@ -28,6 +28,8 @@ export class Alerts extends Component {
             }
             if (error.message.username) {
                 alert.show('The email is already in use')
+            }if (error.message.due_date) {
+                alert.show(`DueDate: ${error.message.due_date.join()}`)
             }
         }
 
@@ -41,6 +43,7 @@ export class Alerts extends Component {
             if (message.passwordNotMatch) {
                 alert.show(message.passwordNotMatch)
             }
+            
         }
 
     }

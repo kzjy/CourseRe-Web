@@ -1,8 +1,19 @@
+
+// CONTENT 
 export const GET_REMINDERS = 'GET_REMINDERS';
 export const DELETE_REMINDERS = 'DELETE_REMINDERS';
 export const ADD_REMINDERS = 'ADD_REMINDERS';
+export const GET_COURSES = 'GET_COURSES';
+export const DELETE_COURSES = 'DELETE_COURSES';
+export const ADD_COURSES = 'ADD_COURSES';
+// export const ORGANIZE_COURSES = 'ORGANIZE_COURSES';
+
+// ERRORS 
 export const GET_ERRORS = 'GET_ERRORS';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
+
+
+// AUTHENTIFICATION 
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";

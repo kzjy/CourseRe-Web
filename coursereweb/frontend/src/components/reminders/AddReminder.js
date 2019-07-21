@@ -3,34 +3,45 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addReminders} from '../../actions/reminderAction'
 import Popup from 'reactjs-popup'
+import moment from 'moment';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import '../../../static/frontend/style.css'
+
 
 export class AddReminder extends Component {
     state = {
         name: '',
         reminder_type: 'Assignment',
-        // due_date: '',
+        due_date: new Date(),
         total: 100,
         received: 0,
         weight: 100,
         course: 1,
-        popup: false
+        popup: false,
+
     }
 
     static propTypes = {
         addReminders: PropTypes.func.isRequired
     }
 
-    onChange = e => this.setState({
-        [e.target.name]:e.target.value
-    });
+    onChange = e => {
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    }
 
     onSubmit = e => {
         e.preventDefault();
         this.setState({popup: false})
         const {name, reminder_type, total, received, weight, course} = this.state;
-        const newReminder = {name, reminder_type, total, received, weight, course};
+        const due_date = this.state.due_date.toISOString()
+        const newReminder = {name, reminder_type, total, received, weight, course, due_date};
         this.props.addReminders(newReminder);
-        
+        console.log('submitted')
+        console.log(newReminder)
         this.closePopup()
     }
     
@@ -42,7 +53,7 @@ export class AddReminder extends Component {
         this.setState({
             name: '',
             reminder_type: 'Assignment',
-            // due_date: '',
+            due_date: '',
             total: 100,
             received: 0,
             weight: 100,
@@ -52,11 +63,19 @@ export class AddReminder extends Component {
         })
     }
 
+    handleChange = date => {
+        // console.log('fired');
+        this.setState({
+            due_date: date
+        }, () => console.log(this.state.due_date));
+        // console.log(this.state.due_date)
+      };
+
     render() {
-        const {name, reminder_type, total, received, weight, course} = this.state
+        const {name, reminder_type, total, received, weight, course, due_date} = this.state
         return (
             <Popup
-                trigger={<button className="btn btn-primary"> + </button>}
+                trigger={<button type="button" className="btn btn-primary btn-lg btn-block" style={{margin:'5%', width:'90%'}}>Add New + </button>}
                 modal
                 closeOnDocumentClick
                 onOpen={this.openPopup}
@@ -73,7 +92,39 @@ export class AddReminder extends Component {
                         <input name="name" type="text" value={name} onChange={this.onChange}
                             className="form-control" placeholder="Default input" id="inputDefault"/>
                     </div>
+                    
+                    {/* course  */}
+                    <div className="form-group">
+                        <label htmlFor="exampleSelect1">Course</label>
+                        <select name="course" className="form-control" id="exampleSelect1"  onChange={this.onChange}>
+                            {
+                                this.props.courses.map(course => {
+                                    return <option value={course.id} key={course.id}>{course.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    
 
+                    {/* Due date */}
+                    <div className="form-group" className="due_date_container">
+                        <label htmlFor="exampleSelect1">Due date</label>
+                        <br/>
+                        <DatePicker
+                            type="text"
+                            name="due_date"
+                            className="form-control"
+                            value={due_date}
+                            selected={this.state.due_date}
+                            onChange={this.handleChange}
+                            showTimeSelect
+                            timeFormat="HH:mm"
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                            style={{width:'100%'}}
+                        />
+                        <br/>
+                    </div>
+                    
                     {/* course 
                     <div className="form-group">
                         <label htmlFor="exampleSelect1">Course</label>
@@ -137,4 +188,8 @@ export class AddReminder extends Component {
     }
 }
 
-export default connect(null, {addReminders})(AddReminder);
+const mapStateToProps = state => ({
+    courses: state.reminderReducer.courses
+});
+
+export default connect(mapStateToProps, {addReminders})(AddReminder);

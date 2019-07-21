@@ -19,8 +19,7 @@ class Reminder(models.Model):
         ('Study', 'S'),
         ('Test', 'T')
     ])
-    due_date = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    due_date = models.DateTimeField()
 
     # grade status
     status = models.BooleanField(default=False)

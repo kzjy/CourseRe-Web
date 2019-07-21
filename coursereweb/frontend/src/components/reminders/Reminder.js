@@ -11,15 +11,18 @@ export class Reminder extends Component {
   };
 
   componentDidMount() {
-    this.props.getReminders();
+    // this.props.getReminders();
   }
 
-  simlifyTime(dateTime) {
+  simplifyTime = (datetime) => {
+    const localDate = new Date(datetime);
+    return localDate.toDateString() + ' at ' + localDate.toLocaleTimeString();
 
   }
 
-  simplifyStatus(status) {
-    return 'Complete' ? status : 'Not complete';
+  simplifyStatus = (status) => {
+    const state = ( status ? 'Complete' : 'Not complete');
+    return state;
   }
 
   render() {
@@ -44,8 +47,8 @@ export class Reminder extends Component {
                 <tr className="table-default" key={reminder.id}>
                     <td>{reminder.name}</td>
                     <td>{reminder.reminder_type}</td>
-                    <td>{reminder.due_date}</td>
-                    <td>{reminder.status}</td>
+                    <td>{this.simplifyTime(reminder.due_date)}</td>
+                    <td>{this.simplifyStatus(reminder.status)}</td>
                     <td>{reminder.received}</td>
                     <td>{reminder.total}</td>
                     <td>{reminder.weight}</td>
@@ -56,7 +59,7 @@ export class Reminder extends Component {
             ))}
           </tbody>
         </table>
-        <button type="button" className="btn btn-primary btn-lg btn-block" style={{margin:'5%', width:'90%'}}>Add New + </button>
+        
       </Fragment>
     );
   }
@@ -66,4 +69,4 @@ const mapStateToProps = state => ({
   reminders: state.reminderReducer.reminders
 });
 
-export default connect(mapStateToProps, { getReminders, deleteReminders })(Reminder);
+export default connect(null, { deleteReminders })(Reminder);

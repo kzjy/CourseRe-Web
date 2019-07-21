@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, GET_ERRORS } from './types';
+import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, GET_COURSES, ADD_COURSES } from './types';
 import { createMessage, returnErrors } from './messagesAction';
 import { tokenConfig } from './authAction';
 
-// get the reminders 
+// GET REMINDERS
 export const getReminders = () => (dispatch, getState) => {
     axios.get('/api/reminders/', tokenConfig(getState))
     .then(res => {
@@ -17,7 +17,7 @@ export const getReminders = () => (dispatch, getState) => {
     )
 }
 
-// delete reminders 
+// DELETE REMINDERS
 export const deleteReminders = (id) => (dispatch, getState) => {
     axios.delete(`/api/reminders/${id}`, tokenConfig(getState))
     .then(res => {
@@ -31,7 +31,7 @@ export const deleteReminders = (id) => (dispatch, getState) => {
     )
 }
 
-// post reminders 
+// POST REMINDERS
 export const addReminders = (reminder) => (dispatch, getState) => {
     axios.post(`/api/reminders/`, reminder, tokenConfig(getState))
     .then(res => {
@@ -42,15 +42,52 @@ export const addReminders = (reminder) => (dispatch, getState) => {
         })
     })
     .catch(e => 
-        // console.log('found error')
-        // const error = {
-        //     message: e.response.data,
-        //     status: e.response.status
-        // }
-        // dispatch({
-        //     type: GET_ERRORS,
-        //     payload: error
-        // })
         dispatch(returnErrors(e.response.data, e.response.status))
     );
 }
+
+
+// GET COURSES
+export const getCourses = () => (dispatch, getState) => {
+    axios.get('/api/courses/', tokenConfig(getState))
+    .then(res => {
+        
+        dispatch({
+            type: GET_COURSES,
+            payload: res.data
+        })
+    })
+    .catch(e => dispatch(returnErrors(e.response.data, e.response.status))
+    )
+}
+
+// DELETE COURSE 
+export const deleteCourses = (id) => (dispatch, getState) => {
+    axios.delete(`/api/courses/${id}`, tokenConfig(getState))
+    .then(res => {
+        dispatch(createMessage({ reminderDeleted: 'Reminder Deleted'}))
+        dispatch({
+            type: DELETE_COURSES,
+            payload: id
+        })
+    })
+    .catch(e => dispatch(returnErrors(e.response.data, e.response.status))
+    )
+}
+
+// ADD COURSE
+export const addCourses = (course) => (dispatch, getState) => {
+    axios.post(`/api/courses/`, course , tokenConfig(getState))
+    .then(res => {
+        // dispatch(createMessage({ reminderAdded: "Reminder Added"}))
+        console.log(res);
+        dispatch({
+            type: ADD_COURSES,
+            payload: res.data
+        })
+    })
+    .catch(e => 
+        dispatch(returnErrors(e.response.data, e.response.status))
+    );
+}
+
