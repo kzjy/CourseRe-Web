@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types'
-import moment from 'moment';
 
-import { getReminders, getCourses, organizeCourseReminders } from "../../actions//reminderAction";
+import { getReminders, getCourses } from "../../actions//reminderAction";
 import AddReminder from './AddReminder';
 import AddCourse from './AddCourse';
 import Course from './Course';
-import DatePicker from 'react-datepicker';
 
 
+// DASHBOARD FOR DISPLAYING ALL ACTIVITIES 
 export class Dashboard extends Component {
     
     static propTypes = {
@@ -23,14 +22,12 @@ export class Dashboard extends Component {
         this.props.getCourses();
     }
 
-    
-      
     render() {
         return (
-            <div style={{margin:'10%', justifyContent:'center'}}>
+            <div style={{justifyContent:'center'}}>
+                <h1 style={{padding: '10% 0 10% 0'}}>Welcome, {this.props.user.first_name}</h1>
                 <AddReminder/>
                 <AddCourse/>
-                
                 {this.props.courseList && this.props.courseList.length > 0 ? this.props.courseList.map(course => {
                     
                     return <Course key={course.course.id} course_info={course}/>
@@ -41,8 +38,8 @@ export class Dashboard extends Component {
     }
 }
 
+// FILTER COURSES AND REMINDERS 
 const getCourseList = (state) => {
-
     var array = state.reminderReducer.courses.map(course => {
         
         return {
@@ -52,14 +49,13 @@ const getCourseList = (state) => {
             })
         }
     })
-    
-    console.log(array)
     return array;
 }
 
 const mapStateToProps = state => ({
-    courseList: getCourseList(state)
+    courseList: getCourseList(state),
+    user: state.authReducer.user
 });
 
 
-export default connect(mapStateToProps, { getReminders, getCourses })(Dashboard);
+export default connect(mapStateToProps, { getReminders, getCourses})(Dashboard);

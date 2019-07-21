@@ -16,24 +16,31 @@ export class Header extends Component {
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
-            <ul className="navbar-nav ml-auto ">
-                {/* <li className="nav-item active">
+            <div className="collapse navbar-collapse" id="navbarColor01">
+
+            
+            <ul className="navbar-nav mr-auto ">
+                <li className="nav-item active">
                     <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                </li> */}
-                <span className="navbar-text mr-3">
-                    <strong>
-                        { user ? `Welcome, ${user.first_name}` : ""}
-                    </strong>
-                </span>
-                <li className="nav-item">
-                    <button className="nav-link btn btn-secondary btn-sm text-light" 
-                            onClick={this.props.logout}>Logout</button>
+                </li>
+                <li className="nav-item active">
+                    <a className="nav-link" href="#/dashboard">Dashboard <span className="sr-only">(current)</span></a>
+                </li>
+                <li className="nav-item active">
+                    <a className="nav-link" href="#/calendar">Calendar <span className="sr-only">(current)</span></a>
+                </li>
+                <li className="nav-item ">
+                    
                 </li>
             </ul>
+            <button className="nav-link btn btn-secondary btn-sm text-light ml-auto" 
+                            onClick={this.props.logout}>Logout</button>
+            </div>
 
         )
 
         const guestLinks = (
+            <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav ml-auto">
                 {/* <li className="nav-item active">
                     <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
@@ -50,6 +57,7 @@ export class Header extends Component {
                 </li>
                 
             </ul>
+            </div>
         )
 
         return (
@@ -60,16 +68,10 @@ export class Header extends Component {
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
-                <div className="collapse navbar-collapse" id="navbarColor01">
-                    
-                    { isAuthenticated ? authLinks : guestLinks}
-                    
-                    {/* <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-                        <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form> */}
-                </div>
+                
+                {/* NAVBAR LINKS  */}
+                { isAuthenticated ? authLinks : guestLinks}
+                
             </nav>
         )
     }

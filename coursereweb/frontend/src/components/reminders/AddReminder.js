@@ -40,8 +40,6 @@ export class AddReminder extends Component {
         const due_date = this.state.due_date.toISOString()
         const newReminder = {name, reminder_type, total, received, weight, course, due_date};
         this.props.addReminders(newReminder);
-        console.log('submitted')
-        console.log(newReminder)
         this.closePopup()
     }
     
@@ -64,11 +62,10 @@ export class AddReminder extends Component {
     }
 
     handleChange = date => {
-        // console.log('fired');
         this.setState({
             due_date: date
         }, () => console.log(this.state.due_date));
-        // console.log(this.state.due_date)
+
       };
 
     render() {

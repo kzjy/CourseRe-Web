@@ -18,7 +18,8 @@ import Alerts from './layouts/Alerts';
 import Register from './account/Register';
 import Login from './account/Login';
 import PrivateRoute from './other/PrivateRoute';
-
+import Home from './layouts/Home';
+import Calendar from './layouts/Calendar';
 
 // alerts 
 const alertOptions = {
@@ -39,8 +40,6 @@ class App extends React.Component {
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
                     <Router>
-
-                    
                     {/* <div style={{
                         position: 'fixed',
                         width:'100%',
@@ -54,7 +53,9 @@ class App extends React.Component {
                     <Header/>
                     <div className="container">
                         <Switch>
-                            <PrivateRoute exact path="/" component={Dashboard}/>
+                            <PrivateRoute exact path="/" component={Home}/>
+                            <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                            <PrivateRoute exact path="/calendar" component={Calendar}/>
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/login" component={Login}/>
                         </Switch>

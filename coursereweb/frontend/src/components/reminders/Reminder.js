@@ -6,8 +6,8 @@ import { getReminders, deleteReminders } from "../../actions/reminderAction";
 export class Reminder extends Component {
   static propTypes = {
     reminders: PropTypes.array.isRequired,
-    getReminders: PropTypes.func.isRequired,
-    deleteReminders: PropTypes.func.isRequired
+    getReminders: PropTypes.func,
+    deleteReminders: PropTypes.func
   };
 
   componentDidMount() {
@@ -28,7 +28,6 @@ export class Reminder extends Component {
   render() {
     return (
       <Fragment>
-        <h3>Dem reminders </h3>
         <table className="table table-hover">
           <thead>
             <tr>

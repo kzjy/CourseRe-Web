@@ -7,11 +7,16 @@ export class Course extends Component {
 
     render() {
         return (
-            <div>
-                {/* {console.log(this.props.course_info)} */}
-                <h1>{this.props.course_info.course.name}</h1>
-                <Reminder reminders={this.props.course_info.reminders}/>
+            <div className="card border-primary mb-3" >
+                <div className="card-header">
+                    <h4 className="card-title" style={{margin: '0'}}>{this.props.course_info.course.name}</h4>
+                    </div>
+                <div className="card-body">
+                    <h6 className="card-title">{this.props.course_info.course.info}</h6>
+                    <Reminder reminders={this.props.course_info.reminders}/>
+                </div>
             </div>
+                
         )
     }
 }
