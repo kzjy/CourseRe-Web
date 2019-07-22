@@ -10,9 +10,6 @@ export class Reminder extends Component {
     deleteReminders: PropTypes.func
   };
 
-  componentDidMount() {
-    // this.props.getReminders();
-  }
 
   simplifyTime = (datetime) => {
     const localDate = new Date(datetime);

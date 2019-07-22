@@ -51,7 +51,7 @@ export class Login extends Component {
             backgroundImage: 'url(../../static/frontend/resources/register_bg.jpg)'}}>
             
             {/*  SIGN IN CARD */}
-            <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8 row h-100 mx-auto justify-content-center align-items-center" >
+            <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8 row h-100 mx-auto justify-content-center align-items-center" style={{zIndex:'99'}} >
               <div className="card card-body my-auto w-25 mw-25" style={{backgroundColor:'rgba(255,255,255,0.7)'}} >
                 <h2 className="text-center text-primary mt-3 mb-5">SIGN IN</h2>
                 <form onSubmit={this.onSubmit}>

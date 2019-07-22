@@ -1,6 +1,12 @@
+/* html, body {
+  margin: 0;
+  height: 100%;
+} */
+
 .modal {
     font-size: 12px;
   }
+  
 .modal > .header {
   width: 100%;
   border-bottom: 1px solid gray;
@@ -142,3 +148,4 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
+

@@ -22,6 +22,13 @@ import PrivateRoute from './other/PrivateRoute';
 import Home from './layouts/Home';
 import Calendar from './layouts/Calendar';
 
+
+import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+
+// Be sure to include styles at some point, probably during your bootstraping
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
+
 // alerts 
 const alertOptions = {
     position: 'bottom center',
@@ -40,18 +47,25 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
+
+                {/* <Router>
+                    <Route render={({ location, history }) => (
+                        <React.Fragment>
+                            
+                            <main>
+                                <PrivateRoute exact path="/" component={Home} history={history} location={location} />
+                                <PrivateRoute exact path="/dashboard" component={Dashboard} history={history} location={location}/>
+                                <PrivateRoute exact path="/calendar" component={Calendar} history={history} location={location}/>
+                                <Route exact path="/register" component={Register}/>
+                                <Route exact path="/login" component={Login}/>
+                            </main>
+                        </React.Fragment>
+                    )}
+                    />
+                </Router> */}
+
+
                     <Router>
-                    {/* <div style={{
-                        position: 'fixed',
-                        width:'100%',
-                        height: '100%',
-                        zIndex: '-99',
-                        filter: 'blur(2px)',
-                        WebkitFilter: 'blur(2px)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.4)', // Tint color
-                        backgroundBlendMode: 'overlay',
-                        backgroundImage: 'url(../../static/frontend/resources/default_bg.jpg)'}}/> */}
-                    {/* <Header/> */}
                     <div >
                         <Switch>
                             <PrivateRoute exact path="/" component={Home}/>
@@ -62,7 +76,6 @@ class App extends React.Component {
                         </Switch>
 
                     </div>
-                    
                     <Alerts/>
                     </Router>
                 </AlertProvider>

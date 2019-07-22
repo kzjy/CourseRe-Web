@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=40, unique=True, blank=False)
-    notes = models.TextField(max_length=1000, editable=True)
-    info = models.TextField(max_length=100, default="A happy little course")
+    notes = models.TextField(max_length=1000, editable=True, blank=True)
+    info = models.TextField(max_length=100, default="A happy little course", blank=True)
     owner = models.ForeignKey(User, related_name="owner_courses", on_delete=models.CASCADE, null=True)
 
 class Reminder(models.Model):
