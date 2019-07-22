@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types'
 
-import { getReminders, getCourses } from "../../actions//reminderAction";
-import AddReminder from './AddReminder';
-import AddCourse from './AddCourse';
-import Course from './Course';
+import { getReminders, getCourses } from "../../actions/reminderAction";
+import AddReminder from '../reminders/AddReminder';
+import AddCourse from '../reminders/AddCourse';
+import Course from '../reminders/Course';
+import Header from './Header';
 
 
 // DASHBOARD FOR DISPLAYING ALL ACTIVITIES 
@@ -25,7 +26,8 @@ export class Dashboard extends Component {
     render() {
         return (
             <div style={{justifyContent:'center'}}>
-                <h1 style={{padding: '10% 0 10% 0'}}>Welcome, {this.props.user.first_name}</h1>
+                <Header dashboard="active" />
+                
                 <AddReminder/>
                 <AddCourse/>
                 {this.props.courseList && this.props.courseList.length > 0 ? this.props.courseList.map(course => {

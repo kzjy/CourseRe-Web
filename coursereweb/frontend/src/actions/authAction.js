@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './messagesAction';
+import { getCourses, getReminders} from './reminderAction';
 import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS} from './types';
 
 
@@ -8,14 +9,14 @@ export const loadUser = () => (dispatch, getState) => {
     // user loading 
     dispatch({type: USER_LOADING});
 
-
-
     axios.get('/api/auth/user', tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
-            })
+            });
+            dispatch(getReminders());
+            dispatch(getCourses());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({
@@ -26,7 +27,6 @@ export const loadUser = () => (dispatch, getState) => {
 
 // login user 
 export const login = (email, password) => dispatch => {
-
 
     // header
     const config = {
@@ -47,7 +47,9 @@ export const login = (email, password) => dispatch => {
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data
-            })
+            });
+            dispatch(getReminders());
+            dispatch(getCourses());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({
@@ -81,7 +83,9 @@ export const register = ({ first_name, email, password }) => dispatch => {
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
-            })
+            });
+            dispatch(getReminders());
+            dispatch(getCourses());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({

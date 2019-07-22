@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { addReminders} from '../../actions/reminderAction'
+import { addReminders } from '../../actions/reminderAction'
+import { createMessage } from '../../actions/messagesAction'
 import Popup from 'reactjs-popup'
 import moment from 'moment';
 import DatePicker from 'react-datepicker'
@@ -14,7 +15,7 @@ export class AddReminder extends Component {
     state = {
         name: '',
         reminder_type: 'Assignment',
-        due_date: new Date(),
+        due_date: null,
         total: 100,
         received: 0,
         weight: 100,
@@ -36,7 +37,17 @@ export class AddReminder extends Component {
     onSubmit = e => {
         e.preventDefault();
         this.setState({popup: false})
+
+        // PROCESS STATE DATA
         const {name, reminder_type, total, received, weight, course} = this.state;
+        if (!this.state.due_date) {
+            this.props.createMessage({EmptyDate: "Due date cannot be blank"});
+            return;
+        } 
+        if (name === '') {
+            this.props.createMessage({EmptyName: "Name cannot be blank"});
+            return;
+        }
         const due_date = this.state.due_date.toISOString()
         const newReminder = {name, reminder_type, total, received, weight, course, due_date};
         this.props.addReminders(newReminder);
@@ -121,17 +132,7 @@ export class AddReminder extends Component {
                         />
                         <br/>
                     </div>
-                    
-                    {/* course 
-                    <div className="form-group">
-                        <label htmlFor="exampleSelect1">Course</label>
-                        <select name="course" className="form-control" id="exampleSelect1" value={course} onChange={this.onChange}>
-                            <option>Assignment</option>
-                            <option>Meet up</option>
-                            <option>Test</option>
-                            <option>Study</option>
-                        </select>
-                    </div> */}
+            
 
                     {/* type of reminder  */}
                     <div className="form-group">
@@ -164,11 +165,6 @@ export class AddReminder extends Component {
                         <input name="weight" type="text" value={weight} onChange={this.onChange}
                             className="form-control" placeholder="Default input" id="inputDefault"/>
                     </div>
-
-                    {/* <div className="form-group">
-                        <label for="exampleTextarea">Example textarea</label>
-                        <textarea className="form-control" id="exampleTextarea" rows="3"></textarea>
-                    </div> */}
                     
                     <div style={{justifyContent:'center', display:'flex'}}>
                         <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Add</button>
@@ -189,4 +185,4 @@ const mapStateToProps = state => ({
     courses: state.reminderReducer.courses
 });
 
-export default connect(mapStateToProps, {addReminders})(AddReminder);
+export default connect(mapStateToProps, {addReminders, createMessage })(AddReminder);

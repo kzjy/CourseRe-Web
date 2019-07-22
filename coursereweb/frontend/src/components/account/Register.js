@@ -54,10 +54,25 @@ export class Register extends Component {
         
         const {first_name, email, password, password2} = this.state;
         return (
-            <div className="col-md-6 m-auto">
-            <div className="card card-body mt-5">
-              <h2 className="text-center">Register</h2>
+          <div style={{
+            //  BACKGROUND
+            className: 'container',
+            position: 'fixed',
+            width:'100%',
+            height: '100%',
+            zIndex: '-99',
+            backgroundColor: 'rgba(255, 255, 255, 0)', 
+            backgroundBlendMode: 'overlay',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundImage: 'url(../../static/frontend/resources/register_bg.jpg)'}}>
+
+            <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8 row h-100 mx-auto justify-content-center align-items-center" >
+            <div className="card card-body mt-5" style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
+              <h2 className="text-center text-primary mt-3 mb-5">SIGN UP</h2>
               <form onSubmit={this.onSubmit}>
+
+                {/* NAME */}
                 <div className="form-group">
                   <label>Name</label>
                   <input
@@ -68,6 +83,8 @@ export class Register extends Component {
                     value={first_name}
                   />
                 </div>
+
+                {/* EMAIL */}
                 <div className="form-group">
                   <label>Email</label>
                   <input
@@ -78,6 +95,8 @@ export class Register extends Component {
                     value={email}
                   />
                 </div>
+
+                {/* PASSWORD */}
                 <div className="form-group">
                   <label>Password</label>
                   <input
@@ -88,6 +107,8 @@ export class Register extends Component {
                     value={password}
                   />
                 </div>
+
+                {/* CONFIRM PASSWORD */}
                 <div className="form-group">
                   <label>Confirm Password</label>
                   <input
@@ -98,16 +119,23 @@ export class Register extends Component {
                     value={password2}
                   />
                 </div>
+
+                <hr/>
+
+                {/* SIGN UP */}
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary btn-large btn-block ml-auto mr=auto">
                     Register
                   </button>
                 </div>
+
+                {/* LINK TO LOG IN */}
                 <p>
                   Already have an account? <Link to="/login">Login</Link>
                 </p>
               </form>
             </div>
+          </div>
           </div>
         )
     }

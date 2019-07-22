@@ -20,13 +20,13 @@ export class Header extends Component {
 
             
             <ul className="navbar-nav mr-auto ">
-                <li className="nav-item active">
+                <li className={"nav-item " + this.props.home}>
                     <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                 </li>
-                <li className="nav-item active">
+                <li className={"nav-item " + this.props.dashboard}>
                     <a className="nav-link" href="#/dashboard">Dashboard <span className="sr-only">(current)</span></a>
                 </li>
-                <li className="nav-item active">
+                <li className={"nav-item " + this.props.calendar}>
                     <a className="nav-link" href="#/calendar">Calendar <span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item ">
@@ -45,14 +45,14 @@ export class Header extends Component {
                 {/* <li className="nav-item active">
                     <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                 </li> */}
-                <li className="nav-item">
+                <li className="nav-item active">
                     <Link to="/register" className="nav-link">
-                        register
+                        Register
                     </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item active">
                     <Link to="/login" className="nav-link">
-                        login
+                        Login
                     </Link>
                 </li>
                 

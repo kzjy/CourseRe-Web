@@ -15,16 +15,13 @@ export class Alerts extends Component {
         const { error, alert, message } = this.props;
         if (error !== prev.error) {
             if (error.message.name) {
-                alert.show(`Name: ${error.message.name.join()}`)
+                alert.error(`Name: ${error.message.name.join()}`)
             };
             if (error.message.total) {
-                alert.show(`Total: ${error.message.total.join()}`)
+                alert.error(`Total: ${error.message.total.join()}`)
             };
             if (error.message.non_field_errors) {
-                alert.show(`${error.message.non_field_errors.join()}`)
-            }
-            if (error.message.non_field_errors) {
-                alert.show(`${error.message.non_field_errors.join()}`)
+                alert.error(`${error.message.non_field_errors.join()}`)
             }
             if (error.message.username) {
                 alert.show('The email is already in use')
@@ -42,6 +39,12 @@ export class Alerts extends Component {
             }
             if (message.passwordNotMatch) {
                 alert.show(message.passwordNotMatch)
+            }
+            if (message.EmptyDate) {
+                alert.error(message.EmptyDate)
+            }
+            if (message.EmptyName) {
+                alert.error(message.EmptyName)
             }
             
         }
