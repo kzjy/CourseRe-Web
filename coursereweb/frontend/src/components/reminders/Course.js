@@ -6,6 +6,9 @@ import { getCourses, deleteCourses } from "../../actions/reminderAction";
 export class Course extends Component {
 
     render() {
+        if (!this.props.course_info) {
+            return (<div></div>)
+        }
         return (
             <div className="card border-primary mb-3" >
                 <div className="card-header">

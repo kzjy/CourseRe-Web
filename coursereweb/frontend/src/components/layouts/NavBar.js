@@ -48,7 +48,7 @@ export class NavBar extends Component {
 
     render() {
         return (
-            <SideNav style={{position:'fixed', backgroundColor:'rgba(47,164,231,0.9)'}} expanded={this.props.navStatus.open} onToggle={this.props.toggleNavbar} onSelect={this.onSelect}>
+            <SideNav style={{position:'fixed', backgroundColor:'rgba(120,194,173,0.9)'}} expanded={this.props.navStatus.open} onToggle={this.props.toggleNavbar} onSelect={this.onSelect}>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="">
 
@@ -58,24 +58,24 @@ export class NavBar extends Component {
                             <i className="fas fa-home" style={{color:'#FFF', fontSize: '1.75em' }}></i>
                             {/* <i className="fa fa-fw fa-home"  /> */}
                         </NavIcon>
-                        <NavText>Home</NavText>
+                        <NavText style={{color:'#FFF'}}>Home</NavText>
                         
                     </NavItem>
 
                     {/* DASHBOARD */}
                     <NavItem eventKey="dashboard">
                         <NavIcon>
-                        <i className="fas fa-stream" style={{ fontSize: '1.75em' }} />
+                        <i className="fas fa-stream" style={{ color:'#FFF', fontSize: '1.75em' }} />
                         </NavIcon>
-                        <NavText>Dashboard</NavText>
+                        <NavText style={{color:'#FFF'}}>Dashboard</NavText>
                     </NavItem>
 
                     {/* CALENDAR */}
                     <NavItem eventKey="calendar">
                         <NavIcon>
-                        <i className="far fa-calendar" style={{ fontSize: '1.75em' }} />
+                        <i className="far fa-calendar" style={{color:'#FFF', fontSize: '1.75em' }} />
                         </NavIcon>
-                        <NavText>Calendar</NavText>
+                        <NavText style={{color:'#FFF'}}>Calendar</NavText>
                     </NavItem>
 
                     <hr/>
@@ -83,9 +83,9 @@ export class NavBar extends Component {
                     {/* LOGOUT */}
                     <NavItem eventKey="logout">
                         <NavIcon>
-                            <i className="fas fa-sign-out-alt" style={{ fontSize: '1.75em' }} />
+                            <i className="fas fa-sign-out-alt" style={{color:'#FFF', fontSize: '1.75em' }} />
                         </NavIcon>
-                        <NavText>Logout</NavText>
+                        <NavText style={{color:'#FFF'}}>Logout</NavText>
                     </NavItem>
                 </SideNav.Nav>
 

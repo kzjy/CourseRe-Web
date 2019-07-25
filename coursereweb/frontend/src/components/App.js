@@ -21,12 +21,8 @@ import Login from './account/Login';
 import PrivateRoute from './other/PrivateRoute';
 import Home from './layouts/Home';
 import Calendar from './layouts/Calendar';
+import CoursePage from './layouts/CoursePage';
 
-
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-
-// Be sure to include styles at some point, probably during your bootstraping
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 // alerts 
@@ -69,8 +65,9 @@ class App extends React.Component {
                     <div >
                         <Switch>
                             <PrivateRoute exact path="/" component={Home}/>
-                            <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                            <PrivateRoute path="/dashboard" component={Dashboard}/>
                             <PrivateRoute exact path="/calendar" component={Calendar}/>
+                            {/* <PrivateRoute exact path={`/dashboard/:course/`} component={CoursePage} /> */}
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/login" component={Login}/>
                         </Switch>

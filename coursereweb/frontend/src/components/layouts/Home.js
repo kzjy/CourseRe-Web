@@ -28,7 +28,7 @@ export class Home extends Component {
             return 64
         } else {
             if (this.props.navStatus.open) {
-                return 250
+                return 240
             }
             return 64
         }
@@ -57,34 +57,6 @@ export class Home extends Component {
                 {/* <Header home="active"/> */}
                 
                     <div className="jumbotron border border-primary mx-3 mx-sm-4 mx-xl-5 " style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
-                        <h1 className="display-3">Hello, {this.props.user.first_name}</h1>
-                        <hr className="my-4 border-primary"/>
-                        
-                        <div className="row">
-                            
-                            <div className="col-md-7 col-xl-9 border-right border-primary">
-                                <h4>Coming up today ...</h4>
-                                {
-                                    (this.props.remindersToday.length > 0) ? this.props.remindersToday.map(reminder => this.comingUpItem(reminder)): 
-                                    (<h6 className="mt-3">Nothing to do</h6>)
-                                }
-                                <br/>
-                                <h4>Coming up this week ...</h4>
-                                {
-                                    (this.props.remindersWeek.length > 0) ? this.props.remindersWeek.map(reminder => this.comingUpItem(reminder)): 
-                                    (<h6 className="mt-3">Nothing to do</h6>)
-                                }
-                                <br/>
-                            </div>
-                            <div className="col-md-5 col-xl-3">
-                                <h4>Calendar </h4>
-                                <hr/>
-                                <Calendar className="m-auto" value={this.state.date} style={{color:'black'}}/>
-                            </div>
-                        </div>
-                    </div> 
-
-                    <div className="jumbotron border border-primary mx-3 mx-sm-4 mx-xl-5 my-5" style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
                         <h1 className="display-3">Hello, {this.props.user.first_name}</h1>
                         <hr className="my-4 border-primary"/>
                         
