@@ -1,15 +1,20 @@
-import { SELECT_ACTIVE, TOGGLE_NAVBAR, UPDATE_WINDOW } from '../actions/types'
+import { SELECT_ACTIVE, TOGGLE_NAVBAR, UPDATE_WINDOW, HIDE_NAVBAR } from '../actions/types'
 
 const initialState = {
     // location: null,
     // history: null,
-    open: true,
+    open: false,
     active: "",
     window: 0,
 }
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case HIDE_NAVBAR:
+            return {
+                ...state,
+                open: false
+            }
         case TOGGLE_NAVBAR:
             return {
                 ...state,

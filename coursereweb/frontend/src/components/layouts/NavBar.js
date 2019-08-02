@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { toggleNavbar, selectActive, updateWindow } from '../../actions/navAction'
+import { toggleNavbar, selectActive, updateWindow, hideNavbar } from '../../actions/navAction'
 import { logout } from '../../actions/authAction'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
@@ -10,12 +10,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 export class NavBar extends Component {
 
     state = {
-        expanded: true,
         selected: '',
-    }
-
-    toggle = () => {
-        this.setState({expanded: !this.state.expanded})
     }
 
     onSelect = selected => {
@@ -42,8 +37,10 @@ export class NavBar extends Component {
     update = () => {
         if (Math.abs(window.innerWidth - this.props.navStatus.window) > 150) {
             this.props.updateWindow(window.innerWidth);
+            if (window.innerWidth < 800) {
+                this.props.hideNavbar()
+            }
         }
-        
     }
 
     render() {
@@ -98,4 +95,4 @@ const mapStateToProps = state => ({
     navStatus: state.navReducer
 })
 
-export default connect(mapStateToProps, { toggleNavbar, selectActive, updateWindow, logout })(NavBar);
+export default connect(mapStateToProps, { toggleNavbar, selectActive, updateWindow, logout, hideNavbar })(NavBar);
