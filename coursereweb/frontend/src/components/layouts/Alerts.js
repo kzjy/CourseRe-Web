@@ -20,6 +20,12 @@ export class Alerts extends Component {
             if (error.message.total) {
                 alert.error(`Total: ${error.message.total.join()}`)
             };
+            if (error.message.received) {
+                alert.error(`Received: ${error.message.received.join()}`)
+            };
+            if (error.message.weight) {
+                alert.error(`Weight: ${error.message.weight.join()}`)
+            };
             if (error.message.non_field_errors) {
                 alert.error(`${error.message.non_field_errors.join()}`)
             }
@@ -32,7 +38,7 @@ export class Alerts extends Component {
 
         if (message !== prev.message) {
             if (message.reminderDeleted) {
-                alert.success("Sucessfully deleted")
+                alert.success("Successfully deleted")
             }
             if (message.reminderAdded) {
                 alert.success('Successfully added ')
@@ -45,6 +51,15 @@ export class Alerts extends Component {
             }
             if (message.EmptyName) {
                 alert.error(message.EmptyName)
+            }
+            if (message.EmptyField) {
+                alert.error(message.EmptyField)
+            }
+            if (message.gradeDeleted) {
+                alert.success("Successfully deleted")
+            }
+            if (message.gradeAdded) {
+                alert.success("Successfully added")
             }
             
         }

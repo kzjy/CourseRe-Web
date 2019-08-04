@@ -5,7 +5,7 @@ const initialState = {
     // history: null,
     open: false,
     active: "",
-    window: 0,
+    window: 0
 }
 
 export default function(state = initialState, action) {

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { getReminders, deleteReminders } from "../../actions/reminderAction";
 
 export class Reminder extends Component {
-  static propTypes = {
-    reminders: PropTypes.array.isRequired,
-    getReminders: PropTypes.func,
-    deleteReminders: PropTypes.func
-  };
+  // static propTypes = {
+  //   reminders: PropTypes.array.isRequired,
+  //   getReminders: PropTypes.func,
+  //   deleteReminders: PropTypes.func
+  // };
 
 
   simplifyTime = (datetime) => {
@@ -32,27 +32,21 @@ export class Reminder extends Component {
               <th scope="col">Type</th>
               <th scope="col">Due</th>
               <th scope="col">Status</th>
-              <th scope="col">Received</th>
-              <th scope="col">Total</th>
-              <th scope="col">Weight</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {this.props.reminders.map(reminder => (
+            {(this.props.reminders) ? this.props.reminders.map(reminder => (
                 <tr className="table-default" key={reminder.id}>
                     <td>{reminder.name}</td>
                     <td>{reminder.reminder_type}</td>
                     <td>{this.simplifyTime(reminder.due_date)}</td>
                     <td>{this.simplifyStatus(reminder.status)}</td>
-                    <td>{reminder.received}</td>
-                    <td>{reminder.total}</td>
-                    <td>{reminder.weight}</td>
                     <td>
                         <button onClick={this.props.deleteReminders.bind(this, reminder.id)} type="button" className="btn btn-secondary">Delete</button>
                     </td>
                 </tr>
-            ))}
+            )): <tr></tr>}
           </tbody>
         </table>
         

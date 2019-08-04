@@ -11,6 +11,14 @@ export const ADD_COURSES = 'ADD_COURSES';
 export const GET_ERRORS = 'GET_ERRORS';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 
+// DASHBOARD
+export const CHANGE_SELECTED = 'CHANGE_SELECTED'
+
+// GRADES
+export const GET_GRADES = "GET_GRADES";
+export const ADD_GRADES = "ADD_GRADES";
+export const DELETE_GRADES = "DELETE_GRADES";
+
 // NAVIGATION
 export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
 export const SELECT_ACTIVE = 'SELECT_ACTIVE';

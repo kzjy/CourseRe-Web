@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { Link, NavLink, Route, Switch } from 'react-router-dom';
 
 import { getReminders, getCourses } from "../../actions/reminderAction";
-import AddReminder from '../reminders/AddReminder';
+import { changeCourse } from "../../actions/dashboardAction";
 import AddCourse from '../reminders/AddCourse';
 import Course from '../reminders/Course';
-import Header from './Header';
-// import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import NavBar from './NavBar';
-import { Home } from './Home';
-import { Calendar } from './Calendar';
-import { Login } from '../account/Login';
-import CoursePage from './CoursePage';
-import PrivateRoute from '../other/PrivateRoute';
-// Be sure to include styles at some point, probably during your bootstraping
-// import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
 
 // DASHBOARD FOR DISPLAYING ALL ACTIVITIES 
 export class Dashboard extends Component {
@@ -56,7 +45,7 @@ export class Dashboard extends Component {
 
     componentDidMount = () => {
         if (this.props.courseList.length > 0) {
-            this.setState({selected: this.props.courseList[0]})
+            this.props.changeCourse(this.props.courseList[0].id)
         }
         window.addEventListener('resize', this.update);
     }
@@ -68,13 +57,28 @@ export class Dashboard extends Component {
     }
 
     selectCourse = (e) => {
-        // e.preventDefault()
         const course = this.props.courseList.filter(course => {
-            // console.log(course.course.id)
-            return course.course.id == e.currentTarget.name
+            return course.id == e.currentTarget.id
         })
-        // console.log(course)
-        this.setState({selected: course[0]})
+        this.props.changeCourse(course[0].id)
+    }
+
+    getButtonBg = (course) => {
+        if (this.props.selected) {
+            if (this.props.selected === course.id) {
+                return 'var(--primary)'
+            }
+        }
+        return 'transparent'
+    }
+
+    getButtonTxt = (course) => {
+        if (this.props.selected) {
+            if (this.props.selected === course.id) {
+                return 'white'
+            }
+        }
+        return 'var(--gray)'
     }
 
     render() {
@@ -97,47 +101,40 @@ export class Dashboard extends Component {
                     <div className="py-4" style={{height:'100%', width:'100%', position:'absolute ' ,overflow:'auto', backgroundColor: 'rgba(255,255,255,0.9)' ,paddingLeft: `${this.getPadding()}px`}}>
                         <div className="px-5">
 
-                            <div className="row">
-                                <button  style={{backgroundColor: 'transparent', border:'none', outline:'none'}} onClick={this.toggleCourses}>
+                            <div className="row" style={{overflow:'visible'}}>
+                                <button style={{backgroundColor: 'transparent', border:'none', outline:'none'}} onClick={this.toggleCourses}>
                                     <i className="fas fa-align-left mx-3" style={{fontSize:'2em'}} ></i>
                                 </button>
-                                <h1 className="mt-2">Dashboard</h1>
+                                <h1 >Dashboard</h1>
                             </div>
                         
                             <hr/>
 
                             <div style={{display:'flex'}}>
                             {/* COURSE SELECTION ON THE LEFT*/}
-                            <div className="border-right border-primary pr-3" style={{display: `${(this.state.visible === 'visible') ? 'inline-block' : 'none'}`, width:'200px', height:'100%', flex:'1'}}>
+                            <div className="border-right border-primary pr-3" style={{display: `${(this.state.visible === 'visible') ? 'inline-block' : 'none'}`, minWidth:'200px', height:'100%', flex:'1'}}>
                                 <h4>Courses</h4>
                                 <hr/>
                                 {/* Display the active courses */}
                                 {this.props.courseList && this.props.courseList.length > 0 ? this.props.courseList.map(course => {
-                                    return (<div key={course.course.id} className="course-button" style={{width:'100%', borderRadius:'5px'}}>
-                                        <button  name={course.course.id} onClick={this.selectCourse} style={{backgroundColor: `${this.state.selected === course ? 'var(--primary)' : 'transparent'}`, 
+                                    return (<div key={course.id} className="course-button" style={{width:'100%', borderRadius:'5px'}}>
+                                        <button  id={course.id} onClick={this.selectCourse} style={{backgroundColor: `${this.getButtonBg(course)}`, 
                                                 border:'none', borderRadius:'5px', outline:'none', width:'inherit', textAlign:'left' }}>
                                             <div >
-                                                <h5 className="my-2" style={{border:'none', color:`${this.state.selected === course ? 'white' : 'var(--gray)'}`}}>{course.course.name}</h5>
+                                                <h5 className="my-2" style={{border:'none', color:`${this.getButtonTxt(course)}`}}>{course.name}</h5>
                                             </div>
                                         </button>
                                     </div>)
                                 }) :''}
 
-                                {/* Button for adding new course  */}
-                                <div style={{width:'100%', borderRadius:'5px'}}>
-                                    <button  name='add' onClick={this.addCourse} style={{backgroundColor: 'transparent', 
-                                            border:'none', borderRadius:'5px', outline:'none', width:'inherit', textAlign:'left' }}>
-                                        <div >
-                                            <h5 className="my-2" style={{border:'none', color:'var(--primary)'}}>Add New +</h5>
-                                        </div>  
-                                    </button>
-                                </div>
+                                {/* Button for adding new course */}
+                                <AddCourse/>
                             </div>
                         
 
                             {/* COURSE PAGE DISPLAY ON RIGHT */}
-                            <div className="px-2" style={{display:'inline-block', flex:'5'}}> 
-                                <Course  course_info={this.state.selected}/>
+                            <div className="px-2" style={{display:'inline-block', flex:'8'}}> 
+                                <Course/>
                             </div>
 
                             </div>
@@ -150,25 +147,12 @@ export class Dashboard extends Component {
     }
 }
 
-// FILTER COURSES AND REMINDERS 
-const getCourseList = (state) => {
-    var array = state.reminderReducer.courses.map(course => {
-        
-        return {
-            course: course,
-            reminders: state.reminderReducer.reminders.filter(reminder => {
-                return reminder.course.id == course.id
-            })
-        }
-    })
-    return array;
-}
-
 const mapStateToProps = state => ({
-    courseList: getCourseList(state),
+    courseList: state.reminderReducer.courses,
     user: state.authReducer.user,
-    navStatus: state.navReducer
+    navStatus: state.navReducer,
+    selected: state.dashboardReducer.selected
 });
 
 
-export default connect(mapStateToProps, { getReminders, getCourses})(Dashboard);
+export default connect(mapStateToProps, { getReminders, getCourses, changeCourse })(Dashboard);

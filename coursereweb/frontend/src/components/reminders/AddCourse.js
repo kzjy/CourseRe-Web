@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addCourses} from '../../actions/reminderAction'
+import { changeCourse } from "../../actions/dashboardAction"
 import Popup from 'reactjs-popup'
 
 export class AddCourse extends Component {
     state = {
        name: '',
-       notes: '',
-       info: '',
+       notes: 'Keep up the good work! ',
+       info: 'A happy little course',
     }
 
     static propTypes = {
@@ -20,14 +21,12 @@ export class AddCourse extends Component {
     });
 
     onSubmit = e => {
-        console.log('submit')
         e.preventDefault();
         this.setState({popup: false})
         const {name, notes, info} = this.state;
         const newCourse = {name, notes, info};
         this.props.addCourses(newCourse);
-        
-        this.closePopup()
+        this.closePopup();
     }
     
     openPopup = e => {
@@ -37,8 +36,8 @@ export class AddCourse extends Component {
     closePopup = e => {
         this.setState({
             name: '',
-            notes: '',
-            info: '',
+            notes: 'Keep up the good work! ',
+            info: 'A happy little course',
             popup: false
 
         })
@@ -48,7 +47,10 @@ export class AddCourse extends Component {
         const {name, notes, info} = this.state
         return (
             <Popup
-                trigger={<button type="button" className="btn btn-primary btn-lg btn-block" style={{margin:'5%', width:'90%'}}>Create New Course + </button>}
+                trigger={<button style={{backgroundColor: 'transparent', 
+                    border:'none', borderRadius:'5px', outline:'none', width:'inherit', textAlign:'left' }}>
+                        <h5 className="my-2" style={{border:'none', color:'var(--primary)'}}>Add New +</h5>
+                    </button>}
                 modal
                 closeOnDocumentClick
                 onOpen={this.openPopup}
@@ -63,39 +65,22 @@ export class AddCourse extends Component {
 
                     {/* Course name  */}
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor="inputDefault">Name</label>
+                        <label className="col-form-label" htmlFor="inputDefault">Name*</label>
                         <input name="name" type="text" value={name} onChange={this.onChange}
                             className="form-control"  id="inputDefault"/>
                     </div>
 
-                    {/* course 
-                    <div className="form-group">
-                        <label htmlFor="exampleSelect1">Course</label>
-                        <select name="course" className="form-control" id="exampleSelect1" value={course} onChange={this.onChange}>
-                            <option>Assignment</option>
-                            <option>Meet up</option>
-                            <option>Test</option>
-                            <option>Study</option>
-                        </select>
-                    </div> */}
-
                     {/* Course info */}
                     <div className="form-group">
                         <label htmlFor="exampleSelect1">Course info</label>
-                        {/* <select name="reminder_type" className="form-control" id="exampleSelect1" value={reminder_type} onChange={this.onChange}>
-                            <option>Assignment</option>
-                            <option>Meet up</option>
-                            <option>Test</option>
-                            <option>Study</option>
-                        </select> */}
-                        <textarea name="info" className="form-control" id="exampleTextarea" rows="3" value={info} onChange={this.onChange}></textarea>
+                        <input name="info" type="text" className="form-control" id="inputDefault" placeholder="A happy little course" value={info} onChange={this.onChange}/>
                     </div>
 
                     {/* Special Notes */}
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor="inputDefault">Special Notes</label>
-                        <input name="notes" type="text" value={notes} onChange={this.onChange}
-                            className="form-control"  id="inputDefault"/>
+                        <label className="col-form-label" htmlFor="inputDefault">Special notes for this course</label>
+                        <textarea name="notes"  value={notes} onChange={this.onChange}
+                            className="form-control"  rows="3"  id="exampleTextarea"  placeholder="Keep up the good work!"/>
                     </div>
                     
                     <div style={{justifyContent:'center', display:'flex'}}>
@@ -104,7 +89,7 @@ export class AddCourse extends Component {
                     </div>
                 </fieldset>
                 </form>
-
+                                
                 
             </div>
                 )}
@@ -113,4 +98,4 @@ export class AddCourse extends Component {
     }
 }
 
-export default connect(null, {addCourses})(AddCourse);
+export default connect(null, {addCourses, changeCourse})(AddCourse);

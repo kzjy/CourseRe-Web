@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './messagesAction';
-import { getCourses, getReminders} from './reminderAction';
+import { getCourses, getReminders, getGrades} from './reminderAction';
 import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS} from './types';
 
 
@@ -17,6 +17,7 @@ export const loadUser = () => (dispatch, getState) => {
             });
             dispatch(getReminders());
             dispatch(getCourses());
+            dispatch(getGrades());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({
@@ -50,6 +51,7 @@ export const login = (email, password) => dispatch => {
             });
             dispatch(getReminders());
             dispatch(getCourses());
+            dispatch(getGrades());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({
@@ -86,6 +88,7 @@ export const register = ({ first_name, email, password }) => dispatch => {
             });
             dispatch(getReminders());
             dispatch(getCourses());
+            dispatch(getGrades());
         }).catch(error => {
             dispatch(returnErrors(error.response.data, error.response.status));
             dispatch({

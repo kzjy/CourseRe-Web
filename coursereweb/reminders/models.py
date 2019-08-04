@@ -21,16 +21,22 @@ class Reminder(models.Model):
     ])
     due_date = models.DateTimeField()
 
-    # grade status
-    status = models.BooleanField(default=False)
-    total = models.FloatField(blank=False, default=100)
-    received = models.FloatField(default=0)
-    weight = models.FloatField(blank=False, default=100)
-
-    # course
     course = models.ForeignKey(Course, related_name="course_reminders", on_delete=models.CASCADE, null=True, blank=True)
-    
-    # User
     owner = models.ForeignKey(User, related_name="owner_reminders", on_delete=models.CASCADE, null=True)
 
 
+class Grade(models.Model):
+    name = models.CharField(max_length=40, unique=False)
+    category = models.CharField(max_length=40, choices=[
+        ('Assignment', 'A'),
+        ('Test', 'T'),
+        ('Other', 'O')
+    ], null=True)
+
+    # grade status
+    total = models.FloatField(blank=False)
+    received = models.FloatField(blank=False)
+    weight = models.FloatField(blank=False)
+
+    course = models.ForeignKey(Course, related_name="course_grades", on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(User, related_name="owner_grades", on_delete=models.CASCADE, null=True)

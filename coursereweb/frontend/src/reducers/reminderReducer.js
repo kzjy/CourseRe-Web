@@ -1,8 +1,9 @@
-import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, DELETE_COURSES, ADD_COURSES, GET_COURSES } from '../actions/types.js';
+import { GET_REMINDERS, DELETE_REMINDERS, ADD_REMINDERS, DELETE_COURSES, ADD_COURSES, GET_COURSES, ADD_GRADES, DELETE_GRADES, GET_GRADES } from '../actions/types.js';
 
 const initialState = {
     reminders: [],
     courses: [],
+    grades: [],
     course_list: []
 }
 
@@ -36,10 +37,24 @@ export default function(state = initialState, action) {
                     action.payload)
             }
         case ADD_COURSES:
-            console.log({...state, courses: [...state.courses, action.payload]})
             return {
                 ...state,
                 courses: [...state.courses, action.payload]
+            }
+        case ADD_GRADES:
+            return {
+                ...state, 
+                grades: [...state.grades, action.payload]
+            }
+        case GET_GRADES:
+            return {
+                ...state, 
+                grades: action.payload
+            }
+        case DELETE_GRADES:
+            return {
+                ...state,
+                grades: state.grades.filter(grade => grade.id !== action.payload)
             }
 
         default:

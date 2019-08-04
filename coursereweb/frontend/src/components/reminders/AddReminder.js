@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { addReminders } from '../../actions/reminderAction'
 import { createMessage } from '../../actions/messagesAction'
 import Popup from 'reactjs-popup'
-import moment from 'moment';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -16,16 +14,8 @@ export class AddReminder extends Component {
         name: '',
         reminder_type: 'Assignment',
         due_date: null,
-        total: 100,
-        received: 0,
-        weight: 100,
-        course: 1,
         popup: false,
 
-    }
-
-    static propTypes = {
-        addReminders: PropTypes.func.isRequired
     }
 
     onChange = e => {
@@ -39,7 +29,7 @@ export class AddReminder extends Component {
         this.setState({popup: false})
 
         // PROCESS STATE DATA
-        const {name, reminder_type, total, received, weight, course} = this.state;
+        const {name, reminder_type} = this.state;
         if (!this.state.due_date) {
             this.props.createMessage({EmptyDate: "Due date cannot be blank"});
             return;
@@ -48,8 +38,9 @@ export class AddReminder extends Component {
             this.props.createMessage({EmptyName: "Name cannot be blank"});
             return;
         }
+        const course = this.props.course
         const due_date = this.state.due_date.toISOString()
-        const newReminder = {name, reminder_type, total, received, weight, course, due_date};
+        const newReminder = {name, reminder_type, course, due_date};
         this.props.addReminders(newReminder);
         this.closePopup()
     }
@@ -80,15 +71,18 @@ export class AddReminder extends Component {
       };
 
     render() {
-        const {name, reminder_type, total, received, weight, course, due_date} = this.state
+        const {name, reminder_type, due_date} = this.state
         return (
             <Popup
-                trigger={<button type="button" className="btn btn-primary btn-lg btn-block" style={{margin:'5%', width:'90%'}}>Add New + </button>}
+                trigger={<button className="btn btn-lg btn-block" style={{backgroundColor: 'transparent', 
+                    border:'none', borderRadius:'5px', outline:'none' }}>
+                        <h5 className="my-2" style={{border:'none', color:'var(--primary)'}}>Add Reminder +</h5>
+                    </button>}
                 modal
                 closeOnDocumentClick
                 onOpen={this.openPopup}
-                open={this.state.popup}
-            >
+                open={this.state.popup}>
+
                 {close => (
                 <div style={{padding:'20px'}}>
                 <form onSubmit={this.onSubmit}>
@@ -99,18 +93,6 @@ export class AddReminder extends Component {
                         <label className="col-form-label" htmlFor="inputDefault">Reminde me to ...</label>
                         <input name="name" type="text" value={name} onChange={this.onChange}
                             className="form-control" placeholder="Default input" id="inputDefault"/>
-                    </div>
-                    
-                    {/* course  */}
-                    <div className="form-group">
-                        <label htmlFor="exampleSelect1">Course</label>
-                        <select name="course" className="form-control" id="exampleSelect1"  onChange={this.onChange}>
-                            {
-                                this.props.courses.map(course => {
-                                    return <option value={course.id} key={course.id}>{course.name}</option>
-                                })
-                            }
-                        </select>
                     </div>
                     
 
@@ -144,27 +126,6 @@ export class AddReminder extends Component {
                             <option>Study</option>
                         </select>
                     </div>
-
-                    {/* received  */}
-                    <div className="form-group">
-                        <label className="col-form-label" htmlFor="inputDefault">Received*</label>
-                        <input name="received" type="text" value={received} onChange={this.onChange}
-                            className="form-control" placeholder="Default input" id="inputDefault"/>
-                    </div>
-
-                    {/* total  */}
-                    <div className="form-group">
-                        <label className="col-form-label" htmlFor="inputDefault">Total</label>
-                        <input name="total" type="text" value={total} onChange={this.onChange}
-                            className="form-control" placeholder="Default input" id="inputDefault"/>
-                    </div>
-
-                    {/* weight */}
-                    <div className="form-group">
-                        <label className="col-form-label" htmlFor="inputDefault">Weight</label>
-                        <input name="weight" type="text" value={weight} onChange={this.onChange}
-                            className="form-control" placeholder="Default input" id="inputDefault"/>
-                    </div>
                     
                     <div style={{justifyContent:'center', display:'flex'}}>
                         <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Add</button>
@@ -185,4 +146,4 @@ const mapStateToProps = state => ({
     courses: state.reminderReducer.courses
 });
 
-export default connect(mapStateToProps, {addReminders, createMessage })(AddReminder);
+export default connect(mapStateToProps, { addReminders, createMessage })(AddReminder);
