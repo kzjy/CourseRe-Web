@@ -20,8 +20,8 @@ import Register from './account/Register';
 import Login from './account/Login';
 import PrivateRoute from './other/PrivateRoute';
 import Home from './layouts/Home';
-import Calendar from './layouts/Calendar';
-import CoursePage from './layouts/CoursePage';
+import CalendarPage  from './layouts/Calendar';
+import Favourites from './reminders/Favourites';
 
 
 
@@ -44,30 +44,12 @@ class App extends React.Component {
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
 
-                {/* <Router>
-                    <Route render={({ location, history }) => (
-                        <React.Fragment>
-                            
-                            <main>
-                                <PrivateRoute exact path="/" component={Home} history={history} location={location} />
-                                <PrivateRoute exact path="/dashboard" component={Dashboard} history={history} location={location}/>
-                                <PrivateRoute exact path="/calendar" component={Calendar} history={history} location={location}/>
-                                <Route exact path="/register" component={Register}/>
-                                <Route exact path="/login" component={Login}/>
-                            </main>
-                        </React.Fragment>
-                    )}
-                    />
-                </Router> */}
-
-
                     <Router>
                     <div >
                         <Switch>
                             <PrivateRoute exact path="/" component={Home}/>
                             <PrivateRoute path="/dashboard" component={Dashboard}/>
-                            <PrivateRoute exact path="/calendar" component={Calendar}/>
-                            {/* <PrivateRoute exact path={`/dashboard/:course/`} component={CoursePage} /> */}
+                            <PrivateRoute exact path="/favourites" component={Favourites}/>
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/login" component={Login}/>
                         </Switch>

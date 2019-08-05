@@ -84,13 +84,6 @@ export class Home extends Component {
                         </div>
                     </div> 
                     
-                    <div className="jumbotron border border-primary mx-3 mx-sm-4 mx-xl-5 my-5" style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
-                        <h3 className="display-5">Quick Access Links</h3>
-                        <hr className="my-4 border-primary"/>
-                        
-                    
-                    </div>
-            
                 </div>
             </div>
         )
@@ -115,7 +108,8 @@ const reminderWeekFilter = (state) => {
     return state.reminderReducer.reminders.filter(reminder => {
         const due_date = new Date(reminder.due_date);
         return week > due_date  &&
-                today < due_date;
+                today < due_date && 
+                today.getDate() !== due_date.getDate();
     })
 }
 

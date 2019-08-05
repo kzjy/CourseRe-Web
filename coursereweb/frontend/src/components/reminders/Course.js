@@ -4,6 +4,7 @@ import { deleteCourses } from "../../actions/reminderAction";
 import { changeCourse } from "../../actions/dashboardAction";
 import HomePanel from './HomePanel';
 import GradePanel from './GradePanel';
+import StatisticsPanel from './StatisticsPanel';
 
 export class Course extends Component {
 
@@ -31,9 +32,9 @@ export class Course extends Component {
                         <li className="nav-item">
                             <a className="nav-link" data-toggle="tab" href="#grade">Grades</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#profile">Profile</a>
-                        </li>
+                        {/* <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#profile">Statistics</a>
+                        </li> */}
                     </ul>
 
                     {/* Tab content */}
@@ -45,14 +46,14 @@ export class Course extends Component {
                         </div>
 
                         {/* Grade tab */}
-                        <div className="px-2 py-2 tab-pane fade active" id="grade">
+                        <div className="px-2 py-2 tab-pane fade" id="grade">
                             <GradePanel current={this.props.current}/>
                         </div>
 
                         {/* Profile tab */}
-                        <div className="px-2 py-2 tab-pane fade active" id="profile">
-                            profile
-                        </div>
+                        {/* <div className="px-2 py-2 tab-pane fade" id="profile">
+                            <StatisticsPanel current={this.props.current}/>
+                        </div> */}
                         
                     </div>
                 </div> 

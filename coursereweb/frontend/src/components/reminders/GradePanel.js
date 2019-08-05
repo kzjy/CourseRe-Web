@@ -36,7 +36,7 @@ export class GradePanel extends Component {
             }
         }
         
-        console.log({assignmentCurrentWeight, assignmentTotalWeight, testCurrentWeight, testTotalWeight, otherCurrentWeight, otherTotalWeight})
+        // console.log({assignmentCurrentWeight, assignmentTotalWeight, testCurrentWeight, testTotalWeight, otherCurrentWeight, otherTotalWeight})
 
         const assignmentAverage = (assignmentTotalWeight !== 0) ? (100 * assignmentCurrentWeight / assignmentTotalWeight).toFixed(2) : 0;
         const testAverage = (testTotalWeight !== 0) ? (100 * testCurrentWeight / testTotalWeight).toFixed(2) : 0;

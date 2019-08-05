@@ -126,6 +126,8 @@ export class AddReminder extends Component {
                             <option>Study</option>
                         </select>
                     </div>
+
+                    <p className="my-4">*Reminder details cannot be changed after it is created</p>
                     
                     <div style={{justifyContent:'center', display:'flex'}}>
                         <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Add</button>

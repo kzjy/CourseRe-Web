@@ -27,6 +27,7 @@ class Reminder(models.Model):
 
 class Grade(models.Model):
     name = models.CharField(max_length=40, unique=False)
+    date = models.DateField(auto_now=True)
     category = models.CharField(max_length=40, choices=[
         ('Assignment', 'A'),
         ('Test', 'T'),

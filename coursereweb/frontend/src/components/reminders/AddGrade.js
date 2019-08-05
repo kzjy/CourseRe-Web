@@ -130,7 +130,9 @@ export class AddGrade extends Component {
                         <label htmlFor="exampleSelect1">Weight*</label>
                         <input name="weight" type="text" className="form-control" id="inputDefault" value={weight} onChange={this.onChange}/>
                     </div>
-                    
+
+                    <p className="my-4">*Grade details cannot be changed after it is created</p>
+
                     <div style={{justifyContent:'center', display:'flex'}}>
                         <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Create</button>
                         <button type="reset" onClick={this.closePopup} style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-secondary">Discard</button>

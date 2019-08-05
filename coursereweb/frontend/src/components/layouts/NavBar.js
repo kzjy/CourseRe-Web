@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleNavbar, selectActive, updateWindow, hideNavbar } from '../../actions/navAction'
 import { logout } from '../../actions/authAction'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -67,12 +67,12 @@ export class NavBar extends Component {
                         <NavText style={{color:'#FFF'}}>Dashboard</NavText>
                     </NavItem>
 
-                    {/* CALENDAR */}
-                    <NavItem eventKey="calendar">
+                    {/* FAVOURITES */}
+                    <NavItem eventKey="favourites">
                         <NavIcon>
-                        <i className="far fa-calendar" style={{color:'#FFF', fontSize: '1.75em' }} />
+                        <i className="far fa-star" style={{color:'#FFF', fontSize: '1.75em' }} />
                         </NavIcon>
-                        <NavText style={{color:'#FFF'}}>Calendar</NavText>
+                        <NavText style={{color:'#FFF'}}>Favourites</NavText>
                     </NavItem>
 
                     <hr/>

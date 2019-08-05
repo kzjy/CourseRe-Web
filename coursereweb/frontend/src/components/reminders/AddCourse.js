@@ -83,6 +83,8 @@ export class AddCourse extends Component {
                             className="form-control"  rows="3"  id="exampleTextarea"  placeholder="Keep up the good work!"/>
                     </div>
                     
+                    <p className="my-4">*Course details cannot be changed after it is created</p>
+
                     <div style={{justifyContent:'center', display:'flex'}}>
                         <button type="submit" style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-primary">Create</button>
                         <button type="reset" onClick={this.closePopup} style={{width:'150px', margin:'0px 10px 0px 10px'}} className="btn btn-secondary">Discard</button>
