@@ -21,8 +21,6 @@ export class HomePanel extends Component {
         return {futureReminders, pastReminders};
     }
 
-   
-
     render() {
         if (!this.props.current || !this.props.current.course) {
             return (<div>

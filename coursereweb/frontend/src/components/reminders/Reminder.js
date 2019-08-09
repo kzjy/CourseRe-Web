@@ -1,15 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { getReminders, deleteReminders } from "../../actions/reminderAction";
+import { deleteReminders } from "../../actions/reminderAction";
 
 export class Reminder extends Component {
-  // static propTypes = {
-  //   reminders: PropTypes.array.isRequired,
-  //   getReminders: PropTypes.func,
-  //   deleteReminders: PropTypes.func
-  // };
-
 
   simplifyTime = (datetime) => {
     const localDate = new Date(datetime);

@@ -1,5 +1,6 @@
 import { CREATE_MESSAGE, GET_ERRORS } from './types';
 
+// generate new message
 export const createMessage = message => {
     return {
         type: CREATE_MESSAGE,

@@ -22,7 +22,6 @@ export class StatisticsPanel extends Component {
             const today = new Date()
             data.push({x: today.toUTCString(), y:0})
         }
-        console.log(data)
         return [{label: 'Grades', data}]
 
     }
@@ -42,25 +41,6 @@ export class StatisticsPanel extends Component {
           }
             
     }
-        // const data = [
-        //     {
-        //     label: 'Series 1',
-        //     data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
-        //     },
-        //     {
-        //     label: 'Series 2',
-        //     data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
-        //     },
-        //     {
-        //     label: 'Series 3',
-        //     data: [{ x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 }]
-        //     }
-        // ]
-  
-        // const axes = [
-        //     { primary: true, type: 'linear', position: 'bottom' },
-        //     { type: 'linear', position: 'left' }
-        // ]
 
 
     render() {

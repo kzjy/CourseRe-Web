@@ -97,10 +97,11 @@ export class Dashboard extends Component {
                     backgroundSize: 'cover',
                     backgroundImage: 'url(../../static/frontend/resources/register_bg.jpg)'}}/>
                     </div>
+                    {/* side bar */}
                     <NavBar style={{position:'fixed'}} location={this.props.location} history={this.props.history}/>
                     <div className="py-4" style={{height:'100%', width:'100%', position:'absolute ' ,overflow:'auto', backgroundColor: 'rgba(255,255,255,0.9)' ,paddingLeft: `${this.getPadding()}px`}}>
                         <div className="px-5">
-
+                            {/* heading */}
                             <div className="row" style={{overflow:'visible'}}>
                                 <button style={{backgroundColor: 'transparent', border:'none', outline:'none'}} onClick={this.toggleCourses}>
                                     <i className="fas fa-align-left mx-3" style={{fontSize:'2em'}} ></i>

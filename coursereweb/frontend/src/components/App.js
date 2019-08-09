@@ -13,15 +13,13 @@ import AlertTemplate from './layouts/AlertTemplate';
 import { loadUser } from '../actions/authAction';
 
 // Components
-import Header from './layouts/Header';
 import Dashboard from './layouts/Dashboard'
 import Alerts from './layouts/Alerts';
 import Register from './account/Register';
 import Login from './account/Login';
 import PrivateRoute from './other/PrivateRoute';
 import Home from './layouts/Home';
-import CalendarPage  from './layouts/Calendar';
-import Favourites from './reminders/Favourites';
+
 
 
 
@@ -49,7 +47,6 @@ class App extends React.Component {
                         <Switch>
                             <PrivateRoute exact path="/" component={Home}/>
                             <PrivateRoute path="/dashboard" component={Dashboard}/>
-                            <PrivateRoute exact path="/favourites" component={Favourites}/>
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/login" component={Login}/>
                         </Switch>

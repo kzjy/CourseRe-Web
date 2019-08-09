@@ -15,6 +15,13 @@ export class Favourites extends Component {
         }
     }
 
+    getFavouriteItem = () => {
+        return (
+        <div>
+
+        </div>)
+    }
+
     render() {
         return (
             <div>
@@ -33,6 +40,8 @@ export class Favourites extends Component {
                     <div className="py-4" style={{height:'100%', width:'100%', position:'absolute ' ,overflow:'auto', backgroundColor: 'rgba(255,255,255,0.9)' ,paddingLeft: `${this.getPadding()}px`}}>
                         <div className="px-5">
                             <h1>Favourites</h1>
+                            <hr/>
+
                         </div>
                     </div>
                 
